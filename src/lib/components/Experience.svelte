@@ -17,7 +17,7 @@
   }
 </script>
 
-<section id="experience" class="py-30 bg-zinc-950/30">
+<section id="experience" class="py-20 bg-zinc-950/30">
   <div class="container mx-auto px-4">
     <h2 class="section-title text-center mb-12">Professional Experience</h2>
 

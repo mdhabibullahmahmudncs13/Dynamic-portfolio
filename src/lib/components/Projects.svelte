@@ -25,7 +25,7 @@
   $: displayedProjects = filteredProjects.slice(0, 3);
 </script>
 
-<section id="projects" class="py-30">
+<section id="projects" class="py-20">
   <div class="container mx-auto px-4">
     <h2 class="section-title text-center mb-4">Featured Projects</h2>
     <p class="text-center text-gray-400 mb-12 max-w-2xl mx-auto">

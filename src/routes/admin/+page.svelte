@@ -24,6 +24,7 @@
     { id: 'experience', name: 'Experience', icon: '💼' },
     { id: 'certifications', name: 'Certifications', icon: '🎓' },
     { id: 'contact', name: 'Contact', icon: '📧' },
+    { id: 'messages', name: 'Messages', icon: '💬' },
     { id: 'blog', name: 'Blog Posts', icon: '📝' }
   ];
 
@@ -121,6 +122,14 @@
           {/await}
         {:else if currentSection === 'contact'}
           {#await import('$lib/components/admin/ContactEditor.svelte')}
+            <div class="text-center">
+              <div class="inline-block w-12 h-12 border-4 border-primary-500 border-t-transparent rounded-full animate-spin"></div>
+            </div>
+          {:then module}
+            <svelte:component this={module.default} />
+          {/await}
+        {:else if currentSection === 'messages'}
+          {#await import('$lib/components/admin/MessagesEditor.svelte')}
             <div class="text-center">
               <div class="inline-block w-12 h-12 border-4 border-primary-500 border-t-transparent rounded-full animate-spin"></div>
             </div>

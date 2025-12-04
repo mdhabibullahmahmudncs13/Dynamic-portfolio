@@ -1,18 +1,56 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { getContact } from '$lib/services/portfolio';
+  import { getContact, createMessage } from '$lib/services/portfolio';
   import type { Contact as ContactType } from '$lib/types';
 
   let contact: ContactType | null = null;
   let loading = true;
+  let formData = {
+    name: '',
+    email: '',
+    message: ''
+  };
+  let submitting = false;
+  let submitStatus: 'success' | 'error' | null = null;
+  let submitMessage = '';
 
   onMount(async () => {
     contact = await getContact();
     loading = false;
   });
+
+  async function handleSubmit(e: Event) {
+    e.preventDefault();
+    submitting = true;
+    submitStatus = null;
+    
+    try {
+      await createMessage({
+        name: formData.name,
+        email: formData.email,
+        message: formData.message,
+        read: false,
+        createdAt: new Date().toISOString()
+      });
+      
+      submitStatus = 'success';
+      submitMessage = 'Message sent successfully! I\'ll get back to you soon.';
+      formData = { name: '', email: '', message: '' };
+      
+      setTimeout(() => {
+        submitStatus = null;
+      }, 5000);
+    } catch (error) {
+      submitStatus = 'error';
+      submitMessage = 'Failed to send message. Please try again.';
+      console.error('Error sending message:', error);
+    } finally {
+      submitting = false;
+    }
+  }
 </script>
 
-<section id="contact" class="py-30 bg-zinc-950/30">
+<section id="contact" class="py-20 bg-zinc-950/30">
   <div class="container mx-auto px-4">
     <h2 class="section-title text-center mb-4">Get In Touch</h2>
     <p class="text-center text-gray-400 mb-12 max-w-2xl mx-auto">
@@ -85,38 +123,51 @@
               {/if}
             </div>
 
-            <!-- Contact Form Placeholder -->
+            <!-- Contact Form -->
             <div>
               <h3 class="text-2xl font-bold text-primary-500 mb-4">Send a Message</h3>
-              <form class="space-y-4">
+              <form class="space-y-4" on:submit={handleSubmit}>
                 <input 
                   type="text" 
                   placeholder="Your Name" 
                   class="input-field"
+                  bind:value={formData.name}
                   required
+                  disabled={submitting}
                 />
                 <input 
                   type="email" 
                   placeholder="Your Email" 
                   class="input-field"
+                  bind:value={formData.email}
                   required
+                  disabled={submitting}
                 />
                 <textarea 
                   placeholder="Your Message" 
                   rows="4" 
                   class="input-field"
+                  bind:value={formData.message}
                   required
+                  disabled={submitting}
                 ></textarea>
                 <button 
                   type="submit" 
                   class="w-full btn-primary"
+                  disabled={submitting}
                 >
-                  Send Message
+                  {submitting ? 'Sending...' : 'Send Message'}
                 </button>
               </form>
-              <p class="text-xs text-gray-500 mt-2 text-center">
-                Note: Configure email service in admin panel
-              </p>
+              {#if submitStatus === 'success'}
+                <p class="text-sm text-green-500 mt-3 text-center">
+                  ✓ {submitMessage}
+                </p>
+              {:else if submitStatus === 'error'}
+                <p class="text-sm text-red-500 mt-3 text-center">
+                  ✗ {submitMessage}
+                </p>
+              {/if}
             </div>
           </div>
         </div>

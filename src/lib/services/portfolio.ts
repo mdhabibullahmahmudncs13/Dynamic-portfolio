@@ -8,7 +8,7 @@ import {
   PUBLIC_APPWRITE_CONTACT_COLLECTION_ID,
   PUBLIC_APPWRITE_BLOG_COLLECTION_ID
 } from '$env/static/public';
-import type { Hero, Skill, Project, Experience, Certification, Contact, BlogPost } from '$lib/types';
+import type { Hero, Skill, Project, Experience, Certification, Contact, BlogPost, Message } from '$lib/types';
 import { ID, Query } from 'appwrite';
 
 // Hero Section
@@ -174,6 +174,33 @@ export async function updateContact(data: Partial<Contact>, contactId?: string):
     console.error('Error updating contact:', error);
     throw error;
   }
+}
+
+// Messages
+export async function getMessages(): Promise<Message[]> {
+  try {
+    const response = await databases.listDocuments(
+      DATABASE_ID,
+      '679f4abc001bf4baec86', // Messages collection ID
+      [Query.orderDesc('createdAt')]
+    );
+    return response.documents as Message[];
+  } catch (error) {
+    console.error('Error fetching messages:', error);
+    return [];
+  }
+}
+
+export async function createMessage(data: Omit<Message, '$id'>): Promise<Message> {
+  return await databases.createDocument(DATABASE_ID, '679f4abc001bf4baec86', ID.unique(), data) as Message;
+}
+
+export async function updateMessage(id: string, data: Partial<Message>): Promise<Message> {
+  return await databases.updateDocument(DATABASE_ID, '679f4abc001bf4baec86', id, data) as Message;
+}
+
+export async function deleteMessage(id: string): Promise<void> {
+  await databases.deleteDocument(DATABASE_ID, '679f4abc001bf4baec86', id);
 }
 
 // Blog Posts

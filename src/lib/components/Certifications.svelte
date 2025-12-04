@@ -28,7 +28,7 @@
   }
 </script>
 
-<section id="certifications" class="py-30">
+<section id="certifications" class="py-20">
   <div class="container mx-auto px-4">
     <h2 class="section-title text-center mb-12">Certifications & Credentials</h2>
 

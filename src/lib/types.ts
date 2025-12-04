@@ -70,6 +70,15 @@ export interface Contact {
   availability: string;
 }
 
+export interface Message {
+  $id?: string;
+  name: string;
+  email: string;
+  message: string;
+  read: boolean;
+  createdAt: string;
+}
+
 export interface BlogPost {
   $id?: string;
   title: string;
