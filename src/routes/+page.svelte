@@ -37,9 +37,9 @@
   </main>
 
   <!-- Footer -->
-  <footer class="bg-cyber-dark/50 border-t border-cyber-blue/20 py-8">
+  <footer class="border-t border-zinc-900 py-8 bg-black">
     <div class="container mx-auto px-4 text-center">
-      <p class="text-gray-400">
+      <p class="text-gray-600 text-sm">
         © {new Date().getFullYear()} All rights reserved. Built with SvelteKit & Appwrite.
       </p>
     </div>

@@ -134,27 +134,27 @@
 
 <div class="space-y-6">
   <div class="flex justify-between items-center">
-    <h2 class="text-3xl font-bold text-cyber-blue">Blog Posts</h2>
+    <h2 class="text-3xl font-bold text-primary-500">Blog Posts</h2>
     <button on:click={() => { resetForm(); showForm = true; }} class="btn-primary">
       + New Post
     </button>
   </div>
 
   {#if message}
-    <div class={`p-4 rounded-lg ${message.includes('Error') ? 'bg-red-500/10 border border-red-500 text-red-400' : 'bg-green-500/10 border border-green-500 text-green-400'}`}>
+    <div class={`p-4 rounded-xl ${message.includes('Error') ? 'bg-red-500/10 border border-red-500 text-red-400' : 'bg-green-500/10 border border-green-500 text-green-400'}`}>
       {message}
     </div>
   {/if}
 
   {#if showForm}
     <div class="card">
-      <h3 class="text-xl font-bold text-cyber-purple mb-4">
+      <h3 class="text-xl font-bold text-primary-500 mb-4">
         {editingPost ? 'Edit Post' : 'New Blog Post'}
       </h3>
       
       <form on:submit={handleSubmit} class="space-y-4">
         <div>
-          <label class="block text-sm font-medium text-gray-300 mb-2">Title *</label>
+          <label class="block text-sm font-medium text-gray-400 mb-2">Title *</label>
           <input
             type="text"
             bind:value={formData.title}
@@ -165,32 +165,32 @@
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-300 mb-2">
+          <label class="block text-sm font-medium text-gray-400 mb-2">
             Slug (URL-friendly) *
           </label>
           <input type="text" bind:value={formData.slug} required class="input-field" />
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-300 mb-2">Excerpt *</label>
+          <label class="block text-sm font-medium text-gray-400 mb-2">Excerpt *</label>
           <textarea bind:value={formData.excerpt} required rows="2" class="input-field"></textarea>
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-300 mb-2">Content (Markdown) *</label>
+          <label class="block text-sm font-medium text-gray-400 mb-2">Content (Markdown) *</label>
           <textarea bind:value={formData.content} required rows="12" class="input-field font-mono text-sm"></textarea>
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-300 mb-2">Featured Image</label>
+          <label class="block text-sm font-medium text-gray-400 mb-2">Featured Image</label>
           <input type="file" accept="image/*" on:change={handleImageUpload} class="input-field" />
           {#if formData.imageUrl}
-            <img src={formData.imageUrl} alt="Preview" class="mt-2 w-full h-48 object-cover rounded-lg" />
+            <img src={formData.imageUrl} alt="Preview" class="mt-2 w-full h-48 object-cover rounded-xl" />
           {/if}
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-300 mb-2">Tags</label>
+          <label class="block text-sm font-medium text-gray-400 mb-2">Tags</label>
           <div class="flex gap-2 mb-2">
             <input
               type="text"
@@ -203,7 +203,7 @@
           </div>
           <div class="flex flex-wrap gap-2">
             {#each formData.tags as tag, i}
-              <span class="px-3 py-1 bg-cyber-green/20 border border-cyber-green rounded-full text-sm flex items-center gap-2">
+              <span class="px-3 py-1 bg-primary-500/20 border border-primary-500 rounded-full text-sm flex items-center gap-2">
                 {tag}
                 <button type="button" on:click={() => removeTag(i)} class="text-red-400 hover:text-red-300">×</button>
               </span>
@@ -214,7 +214,7 @@
         <div class="flex items-center space-x-4">
           <label class="flex items-center space-x-2 cursor-pointer">
             <input type="checkbox" bind:checked={formData.published} class="w-5 h-5" />
-            <span class="text-sm text-gray-300">Publish immediately</span>
+            <span class="text-sm text-gray-400">Publish immediately</span>
           </label>
         </div>
 
@@ -228,7 +228,7 @@
 
   {#if loading}
     <div class="text-center py-12">
-      <div class="inline-block w-12 h-12 border-4 border-cyber-blue border-t-transparent rounded-full animate-spin"></div>
+      <div class="inline-block w-12 h-12 border-4 border-primary-500 border-t-transparent rounded-full animate-spin"></div>
     </div>
   {:else if posts.length > 0}
     <div class="space-y-4">
@@ -237,7 +237,7 @@
           <div class="flex justify-between items-start">
             <div class="flex-1">
               <div class="flex items-center gap-3 mb-2">
-                <h3 class="text-xl font-bold text-cyber-blue">{post.title}</h3>
+                <h3 class="text-xl font-bold text-primary-500">{post.title}</h3>
                 {#if post.published}
                   <span class="px-2 py-1 bg-green-500/20 text-green-400 text-xs rounded-full">Published</span>
                 {:else}
@@ -247,7 +247,7 @@
               <p class="text-gray-400 text-sm mb-2">{post.excerpt}</p>
               <div class="flex flex-wrap gap-2 mb-2">
                  {#each Array.isArray(post.tags) ? post.tags : [] as tag}
-                  <span class="px-2 py-1 bg-cyber-dark border border-cyber-green/30 rounded text-xs">{tag}</span>
+                  <span class="px-2 py-1 bg-zinc-950 border border-primary-500/30 rounded text-xs">{tag}</span>
                 {/each}
               </div>
               <p class="text-xs text-gray-500">
@@ -255,7 +255,7 @@
               </p>
             </div>
             <div class="flex gap-2 ml-4">
-              <button on:click={() => handleEdit(post)} class="text-cyber-purple hover:text-cyber-blue">✏️</button>
+              <button on:click={() => handleEdit(post)} class="text-primary-500 hover:text-primary-500">✏️</button>
               <button on:click={() => handleDelete(post.$id)} class="text-red-400 hover:text-red-300">🗑️</button>
             </div>
           </div>

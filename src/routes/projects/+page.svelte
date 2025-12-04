@@ -11,26 +11,29 @@
 
   onMount(async () => {
     projects = await getProjects();
-    console.log('Projects data:', projects);
-    projects.forEach(p => {
-      console.log(`Project: ${p.title}, videoUrl:`, p.videoUrl, 'imageUrl:', p.imageUrl);
-    });
     loading = false;
   });
 
   $: filteredProjects = selectedCategory === 'featured' 
     ? projects.filter(p => p.featured) 
     : projects.filter(p => p.category === selectedCategory);
-  
-  $: displayedProjects = filteredProjects.slice(0, 3);
 </script>
 
-<section id="projects" class="py-30">
+<svelte:head>
+  <title>All Projects - Portfolio</title>
+</svelte:head>
+
+<div class="min-h-screen bg-black py-20">
   <div class="container mx-auto px-4">
-    <h2 class="section-title text-center mb-4">Featured Projects</h2>
-    <p class="text-center text-gray-400 mb-12 max-w-2xl mx-auto">
-      A showcase of my work in cybersecurity, DevOps automation, and full-stack development
-    </p>
+    <div class="mb-12">
+      <a href="/" class="text-primary-500 hover:text-primary-500/80 transition-colors flex items-center gap-2 mb-6">
+        ← Back to Home
+      </a>
+      <h1 class="text-4xl md:text-5xl font-bold text-primary-500 mb-4">All Projects</h1>
+      <p class="text-gray-400 max-w-2xl">
+        Browse through all my projects in cybersecurity, DevOps automation, and full-stack development
+      </p>
+    </div>
 
     <!-- Category Filter -->
     <div class="flex flex-wrap justify-center gap-4 mb-12">
@@ -49,12 +52,12 @@
     </div>
 
     {#if loading}
-      <div class="text-center">
+      <div class="text-center py-20">
         <div class="inline-block w-12 h-12 border-4 border-primary-500 border-t-transparent rounded-full animate-spin"></div>
       </div>
     {:else if filteredProjects.length > 0}
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {#each displayedProjects as project}
+        {#each filteredProjects as project}
           <div class="card group hover:shadow-2xl hover:shadow-primary-500/20 transition-all duration-300">
             {#if project.videoUrl}
               <div class="relative overflow-hidden rounded-xl mb-4 aspect-video">
@@ -123,19 +126,8 @@
           </div>
         {/each}
       </div>
-      
-      {#if filteredProjects.length > 3}
-        <div class="text-center mt-12">
-          <a 
-            href="/projects" 
-            class="inline-block px-8 py-3 bg-primary-500 text-white rounded-xl font-semibold hover:bg-primary-500/80 transition-colors"
-          >
-            View All Projects
-          </a>
-        </div>
-      {/if}
     {:else}
-      <p class="text-center text-gray-400">No projects available for this category.</p>
+      <p class="text-center text-gray-400 py-20">No projects available for this category.</p>
     {/if}
   </div>
-</section>
+</div>

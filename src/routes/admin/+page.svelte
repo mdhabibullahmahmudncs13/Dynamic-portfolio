@@ -39,9 +39,9 @@
 {#if adminAuthenticated}
   <div class="min-h-screen flex">
     <!-- Sidebar -->
-    <div class="w-64 bg-cyber-dark/50 border-r border-cyber-blue/20 p-6">
+    <div class="w-64 bg-zinc-950 border-r border-primary-500/20 p-6">
       <div class="mb-8">
-        <h1 class="text-2xl font-bold bg-gradient-to-r from-cyber-blue to-cyber-purple bg-clip-text text-transparent">
+        <h1 class="text-2xl font-bold bg-primary-500  ">
           Admin Panel
         </h1>
         <p class="text-gray-400 text-sm mt-1">Portfolio Management</p>
@@ -51,10 +51,10 @@
         {#each sections as section}
           <button
             on:click={() => currentSection = section.id}
-            class={`w-full text-left px-4 py-3 rounded-lg transition-all duration-200 flex items-center space-x-3 ${
+            class={`w-full text-left px-4 py-3 rounded-xl transition-all duration-200 flex items-center space-x-3 ${
               currentSection === section.id
-                ? 'bg-cyber-blue text-cyber-dark font-semibold'
-                : 'text-gray-300 hover:bg-cyber-dark/50 hover:text-cyber-blue'
+                ? 'bg-primary-500 text-zinc-900 font-semibold'
+                : 'text-gray-400 hover:bg-zinc-950 hover:text-primary-500'
             }`}
           >
             <span class="text-xl">{section.icon}</span>
@@ -63,13 +63,13 @@
         {/each}
       </nav>
 
-      <div class="mt-8 pt-8 border-t border-cyber-blue/20 space-y-2">
-        <a href="/" class="block w-full text-left px-4 py-3 rounded-lg text-gray-300 hover:bg-cyber-dark/50 hover:text-cyber-blue transition-all duration-200">
+      <div class="mt-8 pt-8 border-t border-primary-500/20 space-y-2">
+        <a href="/" class="block w-full text-left px-4 py-3 rounded-xl text-gray-400 hover:bg-zinc-950 hover:text-primary-500 transition-all duration-200">
           🏠 View Portfolio
         </a>
         <button
           on:click={handleLogout}
-          class="w-full text-left px-4 py-3 rounded-lg text-gray-300 hover:bg-red-500/20 hover:text-red-400 transition-all duration-200"
+          class="w-full text-left px-4 py-3 rounded-xl text-gray-400 hover:bg-red-500/20 hover:text-red-400 transition-all duration-200"
         >
           🚪 Logout
         </button>
@@ -82,7 +82,7 @@
         {#if currentSection === 'hero'}
           {#await import('$lib/components/admin/HeroEditor.svelte')}
             <div class="text-center">
-              <div class="inline-block w-12 h-12 border-4 border-cyber-blue border-t-transparent rounded-full animate-spin"></div>
+              <div class="inline-block w-12 h-12 border-4 border-primary-500 border-t-transparent rounded-full animate-spin"></div>
             </div>
           {:then module}
             <svelte:component this={module.default} />
@@ -90,7 +90,7 @@
         {:else if currentSection === 'skills'}
           {#await import('$lib/components/admin/SkillsEditor.svelte')}
             <div class="text-center">
-              <div class="inline-block w-12 h-12 border-4 border-cyber-blue border-t-transparent rounded-full animate-spin"></div>
+              <div class="inline-block w-12 h-12 border-4 border-primary-500 border-t-transparent rounded-full animate-spin"></div>
             </div>
           {:then module}
             <svelte:component this={module.default} />
@@ -98,7 +98,7 @@
         {:else if currentSection === 'projects'}
           {#await import('$lib/components/admin/ProjectsEditor.svelte')}
             <div class="text-center">
-              <div class="inline-block w-12 h-12 border-4 border-cyber-blue border-t-transparent rounded-full animate-spin"></div>
+              <div class="inline-block w-12 h-12 border-4 border-primary-500 border-t-transparent rounded-full animate-spin"></div>
             </div>
           {:then module}
             <svelte:component this={module.default} />
@@ -106,7 +106,7 @@
         {:else if currentSection === 'experience'}
           {#await import('$lib/components/admin/ExperienceEditor.svelte')}
             <div class="text-center">
-              <div class="inline-block w-12 h-12 border-4 border-cyber-blue border-t-transparent rounded-full animate-spin"></div>
+              <div class="inline-block w-12 h-12 border-4 border-primary-500 border-t-transparent rounded-full animate-spin"></div>
             </div>
           {:then module}
             <svelte:component this={module.default} />
@@ -114,7 +114,7 @@
         {:else if currentSection === 'certifications'}
           {#await import('$lib/components/admin/CertificationsEditor.svelte')}
             <div class="text-center">
-              <div class="inline-block w-12 h-12 border-4 border-cyber-blue border-t-transparent rounded-full animate-spin"></div>
+              <div class="inline-block w-12 h-12 border-4 border-primary-500 border-t-transparent rounded-full animate-spin"></div>
             </div>
           {:then module}
             <svelte:component this={module.default} />
@@ -122,7 +122,7 @@
         {:else if currentSection === 'contact'}
           {#await import('$lib/components/admin/ContactEditor.svelte')}
             <div class="text-center">
-              <div class="inline-block w-12 h-12 border-4 border-cyber-blue border-t-transparent rounded-full animate-spin"></div>
+              <div class="inline-block w-12 h-12 border-4 border-primary-500 border-t-transparent rounded-full animate-spin"></div>
             </div>
           {:then module}
             <svelte:component this={module.default} />
@@ -130,7 +130,7 @@
         {:else if currentSection === 'blog'}
           {#await import('$lib/components/admin/BlogEditor.svelte')}
             <div class="text-center">
-              <div class="inline-block w-12 h-12 border-4 border-cyber-blue border-t-transparent rounded-full animate-spin"></div>
+              <div class="inline-block w-12 h-12 border-4 border-primary-500 border-t-transparent rounded-full animate-spin"></div>
             </div>
           {:then module}
             <svelte:component this={module.default} />

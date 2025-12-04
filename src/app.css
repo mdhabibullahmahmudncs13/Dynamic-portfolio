@@ -4,101 +4,58 @@
 
 @layer base {
   * {
-    @apply border-cyber-blue/20;
+    scrollbar-width: thin;
+    scrollbar-color: #22c55e #000000;
   }
   
   body {
-    @apply bg-cyber-darker text-gray-100;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    @apply bg-black text-gray-100 font-sans;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-bold;
+    @apply font-semibold;
   }
 
-  /* Custom Scrollbar */
   ::-webkit-scrollbar {
     @apply w-2;
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-cyber-dark;
+    @apply bg-black;
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-cyber-blue/50 rounded;
+    @apply bg-primary-500 rounded;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-cyber-blue;
+    @apply bg-primary-400;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply px-6 py-3 bg-gradient-to-r from-cyber-blue to-cyber-purple rounded-lg font-semibold 
-           hover:shadow-lg hover:shadow-cyber-blue/50 transition-all duration-300 
-           hover:scale-105 active:scale-95;
+    @apply px-6 py-3 bg-primary-500 text-black font-semibold rounded-lg 
+           hover:bg-primary-400 transition-all duration-200;
   }
 
   .btn-secondary {
-    @apply px-6 py-3 border-2 border-cyber-blue text-cyber-blue rounded-lg font-semibold
-           hover:bg-cyber-blue hover:text-cyber-dark transition-all duration-300
-           hover:shadow-lg hover:shadow-cyber-blue/50;
+    @apply px-6 py-3 border border-zinc-800 text-gray-300 font-medium rounded-lg 
+           hover:bg-zinc-900 transition-all duration-200;
   }
 
   .card {
-    @apply bg-cyber-dark/50 backdrop-blur-sm border border-cyber-blue/20 rounded-lg p-6
-           hover:border-cyber-blue/40 transition-all duration-300;
+    @apply bg-zinc-950 border border-zinc-900 rounded-xl p-6 
+           hover:border-zinc-800 transition-all duration-200;
   }
 
   .input-field {
-    @apply w-full px-4 py-3 bg-cyber-dark/50 border border-cyber-blue/30 rounded-lg
-           focus:outline-none focus:border-cyber-blue focus:ring-2 focus:ring-cyber-blue/20
-           transition-all duration-200 text-gray-100 placeholder-gray-500;
+    @apply w-full px-4 py-3 bg-zinc-950 border border-zinc-900 rounded-lg text-gray-100 
+           focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500 
+           transition-all placeholder-gray-600;
   }
 
   .section-title {
-    @apply text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-cyber-blue via-cyber-purple to-cyber-pink
-           bg-clip-text text-transparent;
+    @apply text-4xl md:text-5xl font-bold mb-4 text-white;
   }
-
-  .grid-background {
-    background-image: 
-      linear-gradient(to right, rgba(0, 217, 255, 0.1) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(0, 217, 255, 0.1) 1px, transparent 1px);
-    background-size: 40px 40px;
-  }
-}
-
-/* Cyber Grid Animation */
-.cyber-grid {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.03;
-}
-
-.cyber-grid::before {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-image: 
-    linear-gradient(0deg, transparent 24%, rgba(0, 217, 255, 0.3) 25%, rgba(0, 217, 255, 0.3) 26%, transparent 27%, transparent 74%, rgba(0, 217, 255, 0.3) 75%, rgba(0, 217, 255, 0.3) 76%, transparent 77%, transparent),
-    linear-gradient(90deg, transparent 24%, rgba(0, 217, 255, 0.3) 25%, rgba(0, 217, 255, 0.3) 26%, transparent 27%, transparent 74%, rgba(0, 217, 255, 0.3) 75%, rgba(0, 217, 255, 0.3) 76%, transparent 77%, transparent);
-  background-size: 50px 50px;
-}
-
-/* Glow effect */
-.glow {
-  box-shadow: 0 0 10px rgba(0, 217, 255, 0.5);
-}
-
-.glow-text {
-  text-shadow: 0 0 10px rgba(0, 217, 255, 0.8);
 }

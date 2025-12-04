@@ -32,7 +32,7 @@
 <div class="min-h-screen flex items-center justify-center px-4">
   <div class="max-w-md w-full">
     <div class="text-center mb-8">
-      <h1 class="text-4xl font-bold mb-2 bg-gradient-to-r from-cyber-blue to-cyber-purple bg-clip-text text-transparent">
+      <h1 class="text-4xl font-bold mb-2 bg-primary-500  ">
         Admin Login
       </h1>
       <p class="text-gray-400">Access your portfolio admin panel</p>
@@ -40,14 +40,14 @@
 
     <div class="card">
       {#if error}
-        <div class="mb-4 p-4 bg-red-500/10 border border-red-500 rounded-lg text-red-400">
+        <div class="mb-4 p-4 bg-red-500/10 border border-red-500 rounded-xl text-red-400">
           {error}
         </div>
       {/if}
 
       <form on:submit={handleLogin} class="space-y-6">
         <div>
-          <label for="email" class="block text-sm font-medium text-gray-300 mb-2">
+          <label for="email" class="block text-sm font-medium text-gray-400 mb-2">
             Email Address
           </label>
           <input
@@ -61,7 +61,7 @@
         </div>
 
         <div>
-          <label for="password" class="block text-sm font-medium text-gray-300 mb-2">
+          <label for="password" class="block text-sm font-medium text-gray-400 mb-2">
             Password
           </label>
           <input
@@ -84,7 +84,7 @@
       </form>
 
       <div class="mt-6 text-center">
-        <a href="/" class="text-cyber-blue hover:text-cyber-purple transition-colors text-sm">
+        <a href="/" class="text-primary-500 hover:text-primary-500 transition-colors text-sm">
           ← Back to Portfolio
         </a>
       </div>

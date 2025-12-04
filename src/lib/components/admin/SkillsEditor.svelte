@@ -89,7 +89,7 @@
 
 <div class="space-y-6">
   <div class="flex justify-between items-center">
-    <h2 class="text-3xl font-bold text-cyber-blue">Skills Management</h2>
+    <h2 class="text-3xl font-bold text-primary-500">Skills Management</h2>
     <button
       on:click={() => { resetForm(); showForm = true; }}
       class="btn-primary"
@@ -99,21 +99,21 @@
   </div>
 
   {#if message}
-    <div class={`p-4 rounded-lg ${message.includes('Error') ? 'bg-red-500/10 border border-red-500 text-red-400' : 'bg-green-500/10 border border-green-500 text-green-400'}`}>
+    <div class={`p-4 rounded-xl ${message.includes('Error') ? 'bg-red-500/10 border border-red-500 text-red-400' : 'bg-green-500/10 border border-green-500 text-green-400'}`}>
       {message}
     </div>
   {/if}
 
   {#if showForm}
     <div class="card">
-      <h3 class="text-xl font-bold text-cyber-purple mb-4">
+      <h3 class="text-xl font-bold text-primary-500 mb-4">
         {editingSkill ? 'Edit Skill' : 'Add New Skill'}
       </h3>
       
       <form on:submit={handleSubmit} class="space-y-4">
         <div class="grid md:grid-cols-2 gap-4">
           <div>
-            <label class="block text-sm font-medium text-gray-300 mb-2">
+            <label class="block text-sm font-medium text-gray-400 mb-2">
               Skill Name *
             </label>
             <input
@@ -126,7 +126,7 @@
           </div>
 
           <div>
-            <label class="block text-sm font-medium text-gray-300 mb-2">
+            <label class="block text-sm font-medium text-gray-400 mb-2">
               Category *
             </label>
             <select bind:value={formData.category} class="input-field" required>
@@ -139,7 +139,7 @@
 
         <div class="grid md:grid-cols-2 gap-4">
           <div>
-            <label class="block text-sm font-medium text-gray-300 mb-2">
+            <label class="block text-sm font-medium text-gray-400 mb-2">
               Proficiency: {formData.proficiency}%
             </label>
             <input
@@ -152,7 +152,7 @@
           </div>
 
           <div>
-            <label class="block text-sm font-medium text-gray-300 mb-2">
+            <label class="block text-sm font-medium text-gray-400 mb-2">
               Icon (Emoji)
             </label>
             <input
@@ -165,7 +165,7 @@
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-300 mb-2">
+          <label class="block text-sm font-medium text-gray-400 mb-2">
             Display Order
           </label>
           <input
@@ -190,23 +190,23 @@
 
   {#if loading}
     <div class="text-center py-12">
-      <div class="inline-block w-12 h-12 border-4 border-cyber-blue border-t-transparent rounded-full animate-spin"></div>
+      <div class="inline-block w-12 h-12 border-4 border-primary-500 border-t-transparent rounded-full animate-spin"></div>
     </div>
   {:else if skills.length > 0}
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
       {#each skills as skill}
-        <div class="card hover:border-cyber-blue/40">
+        <div class="card hover:border-primary-500/40">
           <div class="flex justify-between items-start mb-3">
             <div class="flex items-center space-x-2">
               {#if skill.icon}
                 <span class="text-2xl">{skill.icon}</span>
               {/if}
-              <h3 class="text-lg font-bold text-cyber-blue">{skill.name}</h3>
+              <h3 class="text-lg font-bold text-primary-500">{skill.name}</h3>
             </div>
             <div class="flex gap-2">
               <button
                 on:click={() => handleEdit(skill)}
-                class="text-cyber-purple hover:text-cyber-blue transition-colors"
+                class="text-primary-500 hover:text-primary-500 transition-colors"
               >
                 ✏️
               </button>
@@ -219,9 +219,9 @@
             </div>
           </div>
           <p class="text-sm text-gray-400 mb-2">{skill.category}</p>
-          <div class="w-full bg-cyber-dark rounded-full h-2 mb-2">
+          <div class="w-full bg-zinc-950 rounded-full h-2 mb-2">
             <div 
-              class="h-2 rounded-full bg-gradient-to-r from-cyber-blue to-cyber-purple"
+              class="h-2 rounded-full bg-primary-500"
               style="width: {skill.proficiency}%"
             ></div>
           </div>

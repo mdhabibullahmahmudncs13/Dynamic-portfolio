@@ -13,18 +13,20 @@
     title: '',
     description: '',
     longDescription: '',
+    mediaType: 'image' as 'image' | 'video',
     imageUrl: '',
+    videoUrl: '',
     demoUrl: '',
     githubUrl: '',
     technologies: [] as string[],
     techInput: '',
-    category: 'fullstack' as 'cybersecurity' | 'devops' | 'fullstack' | 'python' | 'other',
+    category: 'fullstack' as 'cybersecurity' | 'devops' | 'fullstack' | 'python' | 'videography' | 'other',
     featured: false,
     order: 0,
     createdAt: new Date().toISOString()
   };
 
-  const categories = ['cybersecurity', 'devops', 'fullstack', 'python', 'other'];
+  const categories = ['cybersecurity', 'devops', 'fullstack', 'python', 'videography', 'other'];
 
   onMount(async () => {
     await loadProjects();
@@ -41,7 +43,9 @@
       title: '',
       description: '',
       longDescription: '',
+      mediaType: 'image',
       imageUrl: '',
+      videoUrl: '',
       demoUrl: '',
       githubUrl: '',
       technologies: [],
@@ -89,6 +93,19 @@
     }
   }
 
+  async function handleVideoUpload(e: Event) {
+    const target = e.target as HTMLInputElement;
+    const file = target.files?.[0];
+    if (!file) return;
+
+    try {
+      const url = await uploadFile(file);
+      formData.videoUrl = url;
+    } catch (error: any) {
+      message = `Upload error: ${error.message}`;
+    }
+  }
+
   async function handleSubmit(e: Event) {
     e.preventDefault();
     message = '';
@@ -131,61 +148,81 @@
 
 <div class="space-y-6">
   <div class="flex justify-between items-center">
-    <h2 class="text-3xl font-bold text-cyber-blue">Projects Management</h2>
+    <h2 class="text-3xl font-bold text-primary-500">Projects Management</h2>
     <button on:click={() => { resetForm(); showForm = true; }} class="btn-primary">
       + Add Project
     </button>
   </div>
 
   {#if message}
-    <div class={`p-4 rounded-lg ${message.includes('Error') ? 'bg-red-500/10 border border-red-500 text-red-400' : 'bg-green-500/10 border border-green-500 text-green-400'}`}>
+    <div class={`p-4 rounded-xl ${message.includes('Error') ? 'bg-red-500/10 border border-red-500 text-red-400' : 'bg-green-500/10 border border-green-500 text-green-400'}`}>
       {message}
     </div>
   {/if}
 
   {#if showForm}
     <div class="card">
-      <h3 class="text-xl font-bold text-cyber-purple mb-4">
+      <h3 class="text-xl font-bold text-primary-500 mb-4">
         {editingProject ? 'Edit Project' : 'Add New Project'}
       </h3>
       
       <form on:submit={handleSubmit} class="space-y-4">
         <div>
-          <label class="block text-sm font-medium text-gray-300 mb-2">Title *</label>
+          <label class="block text-sm font-medium text-gray-400 mb-2">Title *</label>
           <input type="text" bind:value={formData.title} required class="input-field" />
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-300 mb-2">Short Description *</label>
+          <label class="block text-sm font-medium text-gray-400 mb-2">Short Description *</label>
           <textarea bind:value={formData.description} required rows="2" class="input-field"></textarea>
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-300 mb-2">Long Description</label>
+          <label class="block text-sm font-medium text-gray-400 mb-2">Long Description</label>
           <textarea bind:value={formData.longDescription} rows="4" class="input-field"></textarea>
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-300 mb-2">Project Image</label>
-          <input type="file" accept="image/*" on:change={handleImageUpload} class="input-field" />
-          {#if formData.imageUrl}
-            <img src={formData.imageUrl} alt="Preview" class="mt-2 w-full h-48 object-cover rounded-lg" />
+          <label class="block text-sm font-medium text-gray-400 mb-2">Media Type</label>
+          <div class="flex gap-4 mb-4">
+            <label class="flex items-center space-x-2 cursor-pointer">
+              <input type="radio" bind:group={formData.mediaType} value="image" class="w-4 h-4" />
+              <span class="text-gray-400">Image</span>
+            </label>
+            <label class="flex items-center space-x-2 cursor-pointer">
+              <input type="radio" bind:group={formData.mediaType} value="video" class="w-4 h-4" />
+              <span class="text-gray-400">Video</span>
+            </label>
+          </div>
+
+          {#if formData.mediaType === 'image'}
+            <label class="block text-sm font-medium text-gray-400 mb-2">Project Image</label>
+            <input type="file" accept="image/*" on:change={handleImageUpload} class="input-field" />
+            {#if formData.imageUrl}
+              <img src={formData.imageUrl} alt="Preview" class="mt-2 w-full h-48 object-cover rounded-xl" />
+            {/if}
+          {:else}
+            <label class="block text-sm font-medium text-gray-400 mb-2">Project Video</label>
+            <input type="file" accept="video/*" on:change={handleVideoUpload} class="input-field" />
+            {#if formData.videoUrl}
+              <video src={formData.videoUrl} controls class="mt-2 w-full h-48 object-cover rounded-xl"></video>
+            {/if}
           {/if}
         </div>
 
         <div class="grid md:grid-cols-2 gap-4">
           <div>
-            <label class="block text-sm font-medium text-gray-300 mb-2">Demo URL</label>
+            <label class="block text-sm font-medium text-gray-400 mb-2">Demo URL</label>
             <input type="url" bind:value={formData.demoUrl} class="input-field" placeholder="https://demo.example.com" />
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-300 mb-2">GitHub URL</label>
+            <label class="block text-sm font-medium text-gray-400 mb-2">GitHub URL</label>
             <input type="url" bind:value={formData.githubUrl} class="input-field" placeholder="https://github.com/..." />
           </div>
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-300 mb-2">Technologies</label>
+          <label class="block text-sm font-medium text-gray-400 mb-2">Technologies</label>
           <div class="flex gap-2 mb-2">
             <input
               type="text"
@@ -198,7 +235,7 @@
           </div>
           <div class="flex flex-wrap gap-2">
             {#each formData.technologies as tech, i}
-              <span class="px-3 py-1 bg-cyber-blue/20 border border-cyber-blue rounded-full text-sm flex items-center gap-2">
+              <span class="px-3 py-1 bg-primary-500/20 border border-primary-500 rounded-full text-sm flex items-center gap-2">
                 {tech}
                 <button type="button" on:click={() => removeTechnology(i)} class="text-red-400 hover:text-red-300">×</button>
               </span>
@@ -208,7 +245,7 @@
 
         <div class="grid md:grid-cols-3 gap-4">
           <div>
-            <label class="block text-sm font-medium text-gray-300 mb-2">Category *</label>
+            <label class="block text-sm font-medium text-gray-400 mb-2">Category *</label>
             <select bind:value={formData.category} class="input-field" required>
               {#each categories as cat}
                 <option value={cat}>{cat.charAt(0).toUpperCase() + cat.slice(1)}</option>
@@ -216,13 +253,13 @@
             </select>
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-300 mb-2">Display Order</label>
+            <label class="block text-sm font-medium text-gray-400 mb-2">Display Order</label>
             <input type="number" bind:value={formData.order} class="input-field" />
           </div>
           <div class="flex items-end">
             <label class="flex items-center space-x-2 cursor-pointer">
               <input type="checkbox" bind:checked={formData.featured} class="w-5 h-5" />
-              <span class="text-sm text-gray-300">Featured Project</span>
+              <span class="text-sm text-gray-400">Featured Project</span>
             </label>
           </div>
         </div>
@@ -237,33 +274,35 @@
 
   {#if loading}
     <div class="text-center py-12">
-      <div class="inline-block w-12 h-12 border-4 border-cyber-blue border-t-transparent rounded-full animate-spin"></div>
+      <div class="inline-block w-12 h-12 border-4 border-primary-500 border-t-transparent rounded-full animate-spin"></div>
     </div>
   {:else if projects.length > 0}
     <div class="grid gap-4">
       {#each projects as project}
         <div class="card">
           <div class="flex gap-4">
-            {#if project.imageUrl}
-              <img src={project.imageUrl} alt={project.title} class="w-32 h-32 object-cover rounded-lg" />
+            {#if project.mediaType === 'video' && project.videoUrl}
+              <video src={project.videoUrl} class="w-32 h-32 object-cover rounded-xl" muted></video>
+            {:else if project.imageUrl}
+              <img src={project.imageUrl} alt={project.title} class="w-32 h-32 object-cover rounded-xl" />
             {/if}
             <div class="flex-1">
               <div class="flex justify-between items-start mb-2">
                 <div>
-                  <h3 class="text-xl font-bold text-cyber-blue">{project.title}</h3>
+                  <h3 class="text-xl font-bold text-primary-500">{project.title}</h3>
                   {#if project.featured}
-                    <span class="text-xs bg-cyber-purple px-2 py-1 rounded-full">FEATURED</span>
+                    <span class="text-xs bg-primary-500 px-2 py-1 rounded-full">FEATURED</span>
                   {/if}
                 </div>
                 <div class="flex gap-2">
-                  <button on:click={() => handleEdit(project)} class="text-cyber-purple hover:text-cyber-blue">✏️</button>
+                  <button on:click={() => handleEdit(project)} class="text-primary-500 hover:text-primary-500">✏️</button>
                   <button on:click={() => handleDelete(project.$id)} class="text-red-400 hover:text-red-300">🗑️</button>
                 </div>
               </div>
               <p class="text-gray-400 mb-2">{project.description}</p>
               <div class="flex flex-wrap gap-2">
                 {#each Array.isArray(project.technologies) ? project.technologies : [] as tech}
-                  <span class="px-2 py-1 bg-cyber-dark border border-cyber-blue/30 rounded text-xs">{tech}</span>
+                  <span class="px-2 py-1 bg-zinc-950 border border-primary-500/30 rounded text-xs">{tech}</span>
                 {/each}
               </div>
             </div>

@@ -17,38 +17,38 @@
   }
 </script>
 
-<section id="experience" class="py-20 bg-cyber-dark/30">
+<section id="experience" class="py-30 bg-zinc-950/30">
   <div class="container mx-auto px-4">
     <h2 class="section-title text-center mb-12">Professional Experience</h2>
 
     {#if loading}
       <div class="text-center">
-        <div class="inline-block w-12 h-12 border-4 border-cyber-blue border-t-transparent rounded-full animate-spin"></div>
+        <div class="inline-block w-12 h-12 border-4 border-primary-500 border-t-transparent rounded-full animate-spin"></div>
       </div>
     {:else if experience.length > 0}
       <div class="max-w-4xl mx-auto">
         {#each experience as exp, index}
-          <div class="relative pl-8 pb-12 border-l-2 border-cyber-blue/30 last:pb-0">
+          <div class="relative pl-8 pb-12 border-l-2 border-primary-500/30 last:pb-0">
             <!-- Timeline Dot -->
-            <div class="absolute left-0 top-0 transform -translate-x-1/2 w-4 h-4 bg-cyber-blue rounded-full border-4 border-cyber-darker"></div>
+            <div class="absolute left-0 top-0 transform -translate-x-1/2 w-4 h-4 bg-primary-500 rounded-full border-4 border-zinc-900er"></div>
 
             <div class="card ml-4">
               <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
                 <div>
-                  <h3 class="text-2xl font-bold text-cyber-blue mb-1">{exp.position}</h3>
-                  <p class="text-xl text-gray-300">{exp.company}</p>
+                  <h3 class="text-2xl font-bold text-primary-500 mb-1">{exp.position}</h3>
+                  <p class="text-xl text-gray-400">{exp.company}</p>
                 </div>
                 <p class="text-gray-400 mt-2 md:mt-0">
                   {formatDate(exp.startDate)} - {exp.endDate ? formatDate(exp.endDate) : 'Present'}
                 </p>
               </div>
 
-              <p class="text-gray-300 mb-4 leading-relaxed">{exp.description}</p>
+              <p class="text-gray-400 mb-4 leading-relaxed">{exp.description}</p>
 
               {#if exp.technologies && exp.technologies.length > 0}
                 <div class="flex flex-wrap gap-2">
                   {#each exp.technologies as tech}
-                    <span class="px-3 py-1 bg-cyber-dark/50 border border-cyber-purple/30 rounded-full text-xs text-cyber-purple">
+                    <span class="px-3 py-1 bg-zinc-950 border border-primary-500/30 rounded-full text-xs text-primary-500">
                       {tech}
                     </span>
                   {/each}
