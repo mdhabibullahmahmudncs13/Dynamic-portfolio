@@ -13,7 +13,7 @@
 
   onMount(() => {
     if (!adminAuthenticated) {
-      goto('/login');
+      goto('/whoami');
     }
   });
 

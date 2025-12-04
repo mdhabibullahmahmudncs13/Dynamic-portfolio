@@ -46,25 +46,6 @@
           </a>
         {/each}
       </div>
-
-      <!-- Admin Button -->
-      <div>
-        {#if $isAdmin}
-          <button
-            on:click={() => goto('/admin')}
-            class="px-4 py-3 bg-primary-500 text-white rounded-xl hover:bg-primary-500/80 transition-colors"
-          >
-            Admin Panel
-          </button>
-        {:else}
-          <button
-            on:click={() => goto('/login')}
-            class="px-4 py-3 border border-primary-500 text-primary-500 rounded-xl hover:bg-primary-500 hover:text-zinc-900 transition-all"
-          >
-            Admin
-          </button>
-        {/if}
-      </div>
     </div>
   </div>
 </nav>

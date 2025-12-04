@@ -16,7 +16,7 @@
     const result = await login(email, password);
     
     if (result.success) {
-      goto('/admin');
+      goto('/xenon');
     } else {
       error = result.error || 'Login failed. Please check your credentials.';
     }
