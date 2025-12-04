@@ -42,24 +42,24 @@
 
 <div class="space-y-6">
   <div class="flex justify-between items-center">
-    <h2 class="text-3xl font-bold text-cyber-blue">Contact Information</h2>
+    <h2 class="text-3xl font-bold text-primary-500">Contact Information</h2>
   </div>
 
   {#if message}
-    <div class={`p-4 rounded-lg ${message.includes('Error') ? 'bg-red-500/10 border border-red-500 text-red-400' : 'bg-green-500/10 border border-green-500 text-green-400'}`}>
+    <div class={`p-4 rounded-xl ${message.includes('Error') ? 'bg-red-500/10 border border-red-500 text-red-400' : 'bg-green-500/10 border border-green-500 text-green-400'}`}>
       {message}
     </div>
   {/if}
 
   {#if loading}
     <div class="text-center py-12">
-      <div class="inline-block w-12 h-12 border-4 border-cyber-blue border-t-transparent rounded-full animate-spin"></div>
+      <div class="inline-block w-12 h-12 border-4 border-primary-500 border-t-transparent rounded-full animate-spin"></div>
     </div>
   {:else}
     <form on:submit={handleSubmit} class="card space-y-6">
       <div class="grid md:grid-cols-2 gap-6">
         <div>
-          <label class="block text-sm font-medium text-gray-300 mb-2">
+          <label class="block text-sm font-medium text-gray-400 mb-2">
             Email Address *
           </label>
           <input
@@ -72,7 +72,7 @@
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-300 mb-2">
+          <label class="block text-sm font-medium text-gray-400 mb-2">
             Phone Number
           </label>
           <input
@@ -85,7 +85,7 @@
       </div>
 
       <div>
-        <label class="block text-sm font-medium text-gray-300 mb-2">
+        <label class="block text-sm font-medium text-gray-400 mb-2">
           Location
         </label>
         <input
@@ -97,7 +97,7 @@
       </div>
 
       <div>
-        <label class="block text-sm font-medium text-gray-300 mb-2">
+        <label class="block text-sm font-medium text-gray-400 mb-2">
           Availability Status *
         </label>
         <select bind:value={formData.availability} required class="input-field">
@@ -120,8 +120,8 @@
       </div>
     </form>
 
-    <div class="card bg-cyber-blue/5 border-cyber-blue/30">
-      <h3 class="text-lg font-bold text-cyber-blue mb-3">📧 Contact Form Integration</h3>
+    <div class="card bg-primary-500/5 border-primary-500/30">
+      <h3 class="text-lg font-bold text-primary-500 mb-3">📧 Contact Form Integration</h3>
       <p class="text-gray-400 text-sm mb-3">
         To enable the contact form, you'll need to set up a serverless function or email service integration.
         Recommended options:

@@ -3,7 +3,9 @@ export interface Hero {
   name: string;
   tagline: string;
   description: string;
+  mediaType?: 'image' | 'video';
   imageUrl?: string;
+  videoUrl?: string;
   resumeUrl?: string;
   githubUrl?: string;
   linkedinUrl?: string;
@@ -24,11 +26,13 @@ export interface Project {
   title: string;
   description: string;
   longDescription?: string;
+  mediaType?: 'image' | 'video';
   imageUrl?: string;
+  videoUrl?: string;
   demoUrl?: string;
   githubUrl?: string;
   technologies: string[]; // JSON array of tech names
-  category: 'cybersecurity' | 'devops' | 'fullstack' | 'python' | 'other';
+  category: 'cybersecurity' | 'devops' | 'fullstack' | 'python' | 'videography' | 'other';
   featured: boolean;
   order: number;
   createdAt: string;
@@ -49,6 +53,7 @@ export interface Certification {
   $id?: string;
   name: string;
   issuer: string;
+  type: 'certificate' | 'achievements' | 'participation';
   issueDate: string;
   expiryDate?: string;
   credentialId?: string;
@@ -63,6 +68,15 @@ export interface Contact {
   phone?: string;
   location?: string;
   availability: string;
+}
+
+export interface Message {
+  $id?: string;
+  name: string;
+  email: string;
+  message: string;
+  read: boolean;
+  createdAt: string;
 }
 
 export interface BlogPost {

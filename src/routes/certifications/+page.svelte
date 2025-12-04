@@ -11,16 +11,10 @@
 
   onMount(async () => {
     certifications = await getCertifications();
-    console.log('Certifications data:', certifications);
-    certifications.forEach(c => {
-      console.log(`Cert: ${c.name}, type:`, c.type);
-    });
     loading = false;
   });
 
   $: filteredCertifications = certifications.filter(c => c.type === selectedType || !c.type);
-  
-  $: displayedCertifications = filteredCertifications.slice(0, 3);
 
   function formatDate(dateString: string): string {
     const date = new Date(dateString);
@@ -28,12 +22,24 @@
   }
 </script>
 
-<section id="certifications" class="py-20">
+<svelte:head>
+  <title>All Certifications - Portfolio</title>
+</svelte:head>
+
+<div class="min-h-screen bg-black py-20">
   <div class="container mx-auto px-4">
-    <h2 class="section-title text-center mb-12">Certifications & Credentials</h2>
+    <div class="mb-12">
+      <a href="/" class="text-primary-500 hover:text-primary-500/80 transition-colors flex items-center gap-2 mb-6">
+        ← Back to Home
+      </a>
+      <h1 class="text-4xl md:text-5xl font-bold text-primary-500 mb-4">All Certifications & Credentials</h1>
+      <p class="text-gray-400 max-w-2xl">
+        View all my professional certifications, achievements, and credentials
+      </p>
+    </div>
 
     <!-- Type Filter -->
-    <div class="flex flex-wrap justify-center gap-2 mb-10">
+    <div class="flex flex-wrap justify-center gap-2 mb-12">
       {#each types as type}
         <button
           on:click={() => selectedType = type}
@@ -49,12 +55,12 @@
     </div>
 
     {#if loading}
-      <div class="text-center">
+      <div class="text-center py-20">
         <div class="inline-block w-12 h-12 border-4 border-primary-500 border-t-transparent rounded-full animate-spin"></div>
       </div>
     {:else if filteredCertifications.length > 0}
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {#each displayedCertifications as cert}
+        {#each filteredCertifications as cert}
           <div class="card group hover:scale-105 transition-transform duration-300">
             {#if cert.imageUrl}
               <div class="mb-4 overflow-hidden rounded-xl">
@@ -91,19 +97,8 @@
           </div>
         {/each}
       </div>
-      
-      {#if filteredCertifications.length > 3}
-        <div class="text-center mt-12">
-          <a 
-            href="/certifications" 
-            class="inline-block px-8 py-3 bg-primary-500 text-white rounded-xl font-semibold hover:bg-primary-500/80 transition-colors"
-          >
-            View All Certifications
-          </a>
-        </div>
-      {/if}
     {:else}
-      <p class="text-center text-gray-400">No certifications available.</p>
+      <p class="text-center text-gray-400 py-20">No certifications available.</p>
     {/if}
   </div>
-</section>
+</div>

@@ -111,54 +111,54 @@
 
 <div class="space-y-6">
   <div class="flex justify-between items-center">
-    <h2 class="text-3xl font-bold text-cyber-blue">Experience Management</h2>
+    <h2 class="text-3xl font-bold text-primary-500">Experience Management</h2>
     <button on:click={() => { resetForm(); showForm = true; }} class="btn-primary">
       + Add Experience
     </button>
   </div>
 
   {#if message}
-    <div class={`p-4 rounded-lg ${message.includes('Error') ? 'bg-red-500/10 border border-red-500 text-red-400' : 'bg-green-500/10 border border-green-500 text-green-400'}`}>
+    <div class={`p-4 rounded-xl ${message.includes('Error') ? 'bg-red-500/10 border border-red-500 text-red-400' : 'bg-green-500/10 border border-green-500 text-green-400'}`}>
       {message}
     </div>
   {/if}
 
   {#if showForm}
     <div class="card">
-      <h3 class="text-xl font-bold text-cyber-purple mb-4">
+      <h3 class="text-xl font-bold text-primary-500 mb-4">
         {editingExp ? 'Edit Experience' : 'Add New Experience'}
       </h3>
       
       <form on:submit={handleSubmit} class="space-y-4">
         <div class="grid md:grid-cols-2 gap-4">
           <div>
-            <label class="block text-sm font-medium text-gray-300 mb-2">Company *</label>
+            <label class="block text-sm font-medium text-gray-400 mb-2">Company *</label>
             <input type="text" bind:value={formData.company} required class="input-field" />
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-300 mb-2">Position *</label>
+            <label class="block text-sm font-medium text-gray-400 mb-2">Position *</label>
             <input type="text" bind:value={formData.position} required class="input-field" />
           </div>
         </div>
 
         <div class="grid md:grid-cols-2 gap-4">
           <div>
-            <label class="block text-sm font-medium text-gray-300 mb-2">Start Date *</label>
+            <label class="block text-sm font-medium text-gray-400 mb-2">Start Date *</label>
             <input type="date" bind:value={formData.startDate} required class="input-field" />
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-300 mb-2">End Date (Leave blank if current)</label>
+            <label class="block text-sm font-medium text-gray-400 mb-2">End Date (Leave blank if current)</label>
             <input type="date" bind:value={formData.endDate} class="input-field" />
           </div>
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-300 mb-2">Description *</label>
+          <label class="block text-sm font-medium text-gray-400 mb-2">Description *</label>
           <textarea bind:value={formData.description} required rows="4" class="input-field"></textarea>
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-300 mb-2">Technologies Used</label>
+          <label class="block text-sm font-medium text-gray-400 mb-2">Technologies Used</label>
           <div class="flex gap-2 mb-2">
             <input
               type="text"
@@ -171,7 +171,7 @@
           </div>
           <div class="flex flex-wrap gap-2">
             {#each formData.technologies as tech, i}
-              <span class="px-3 py-1 bg-cyber-purple/20 border border-cyber-purple rounded-full text-sm flex items-center gap-2">
+              <span class="px-3 py-1 bg-primary-500/20 border border-primary-500 rounded-full text-sm flex items-center gap-2">
                 {tech}
                 <button type="button" on:click={() => removeTechnology(i)} class="text-red-400 hover:text-red-300">×</button>
               </span>
@@ -180,7 +180,7 @@
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-300 mb-2">Display Order</label>
+          <label class="block text-sm font-medium text-gray-400 mb-2">Display Order</label>
           <input type="number" bind:value={formData.order} class="input-field" />
         </div>
 
@@ -194,7 +194,7 @@
 
   {#if loading}
     <div class="text-center py-12">
-      <div class="inline-block w-12 h-12 border-4 border-cyber-blue border-t-transparent rounded-full animate-spin"></div>
+      <div class="inline-block w-12 h-12 border-4 border-primary-500 border-t-transparent rounded-full animate-spin"></div>
     </div>
   {:else if experiences.length > 0}
     <div class="space-y-4">
@@ -202,19 +202,19 @@
         <div class="card">
           <div class="flex justify-between items-start mb-3">
             <div>
-              <h3 class="text-xl font-bold text-cyber-blue">{exp.position}</h3>
-              <p class="text-gray-300">{exp.company}</p>
+              <h3 class="text-xl font-bold text-primary-500">{exp.position}</h3>
+              <p class="text-gray-400">{exp.company}</p>
               <p class="text-sm text-gray-400">{new Date(exp.startDate).toLocaleDateString()} - {exp.endDate ? new Date(exp.endDate).toLocaleDateString() : 'Present'}</p>
             </div>
             <div class="flex gap-2">
-              <button on:click={() => handleEdit(exp)} class="text-cyber-purple hover:text-cyber-blue">✏️</button>
+              <button on:click={() => handleEdit(exp)} class="text-primary-500 hover:text-primary-500">✏️</button>
               <button on:click={() => handleDelete(exp.$id)} class="text-red-400 hover:text-red-300">🗑️</button>
             </div>
           </div>
           <p class="text-gray-400 mb-3">{exp.description}</p>
           <div class="flex flex-wrap gap-2">
             {#each Array.isArray(exp.technologies) ? exp.technologies : [] as tech}
-              <span class="px-2 py-1 bg-cyber-dark border border-cyber-purple/30 rounded text-xs">{tech}</span>
+              <span class="px-2 py-1 bg-zinc-950 border border-primary-500/30 rounded text-xs">{tech}</span>
             {/each}
           </div>
         </div>

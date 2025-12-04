@@ -8,10 +8,7 @@
   });
 </script>
 
-<div class="min-h-screen bg-cyber-darker relative overflow-x-hidden">
-  <!-- Cyber Grid Background -->
-  <div class="cyber-grid"></div>
-  
+<div class="min-h-screen bg-black relative overflow-x-hidden">
   <!-- Content -->
   <div class="relative z-10">
     <slot />
