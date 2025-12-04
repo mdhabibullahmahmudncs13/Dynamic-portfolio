@@ -7,7 +7,7 @@
   let loading = true;
   let selectedCategory = 'featured';
 
-  const categories = ['featured', 'cybersecurity', 'devops', 'fullstack', 'python', 'videography','other'];
+  const categories = ['featured', 'fullstack', 'python', 'devops', 'cybersecurity', 'videography', 'other'];
 
   onMount(async () => {
     projects = await getProjects();

@@ -5,9 +5,9 @@
 
   let certifications: Certification[] = [];
   let loading = true;
-  let selectedType = 'certificate';
+  let selectedType = 'achievements';
 
-  const types = ['certificate', 'achievements', 'participation'];
+  const types = ['achievements', 'certificate', 'participation'];
 
   onMount(async () => {
     certifications = await getCertifications();
